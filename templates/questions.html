@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Questions</title>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="../static/css/questions.css" rel="stylesheet">
+  <link href="../static/images/favicon.ico" rel="icon" type="image/x-icon" />
+</head>
+
+<body>
+  <script>
+    var pagination = 1;
+    var total_papers = {{ question_papers| length}};
+    $(document).ready(function () {
+      $("#x" + pagination).show();
+    });
+
+    $(function () {
+      var loading = $('#loadbar').hide();
+      $(document)
+        .ajaxStart(function () {
+          loading.show();
+        }).ajaxStop(function () {
+          loading.hide();
+        });
+
+      $("label.btn").on('click', function () {
+        var choice = $(this).find('input:radio').val();
+        $(this).siblings().css({ 'background-color': '#428bca' });
+        $(this).css({ 'background-color': 'green' });
+      });
+    });
+
+    function submitButton() {
+      event.preventDefault();
+      let ques_divs = $("#x" + pagination).children('.modal-content').length
+      let ques_checked = x = $('#x' + pagination + ' input:radio:checked').length
+      if (ques_checked === ques_divs) {
+        data = {}
+        for (let i = 1; i <= pagination; i++) {
+          let disease = $('#x' + i).children(".title")[0].textContent;
+          let system = $('#x' + i).children(".system")[0].textContent;
+          let radio_selected = $('#x' + i + ' input:radio:checked')
+          let radio_count = $('#x' + i + ' input:radio:checked').length
+
+          let sum = 0;
+          for (let j = 0; j < radio_count; j++) {
+            sum = sum + radio_selected[j].value;
+          }
+          data[system + ':' + disease] = sum;
+        }
+        $('#xsubmit').val(JSON.stringify(data));
+        $('#xform').submit();
+
+      }
+      else {
+        $('#smallModal').modal();
+      }
+    }
+
+    function nextButton() {
+      let ques_divs = $("#x" + pagination).children('.modal-content').length
+      let ques_checked = x = $('#x' + pagination + ' input:radio:checked').length
+      if (ques_checked === ques_divs) {
+        $("#x" + pagination).hide();
+        pagination = pagination + 1;
+        $("#x" + pagination).show();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        if (pagination > 1) {
+          $(".previous").show();
+        }
+        if (pagination === total_papers) {
+          $(".next").hide();
+          $(".submit").show();
+        }
+      }
+      else {
+        $('#smallModal').modal();
+      }
+    }
+
+    function previousButton() {
+      $("#x" + pagination).hide();
+      pagination = pagination - 1;
+      $("#x" + pagination).show();
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+      if (pagination === 1) {
+        $(".previous").hide();
+      }
+      if (pagination < total_papers) {
+        $(".submit").hide();
+        $(".next").show();
+      }
+    }
+
+  </script>
+  <div class="container-fluid bg-info">
+
+    {% for paper in question_papers %}
+    <div class="modal-dialog" id="x{{loop.index}}" style="display: none;width:45%;">
+      <h2 class="system">{{paper.title}}</h2>
+      <h2 style="display:none;" class="title">{{paper.disease}}</h2>
+      {% for ques in paper.questions %}
+      {% set outer_loop = loop %}
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 style="line-height:1.7;"><span class="label label-warning qid">{{loop.index}}</span> {{ques}} </h3>
+        </div>
+        <div class="modal-body">
+          <div class="quiz" id="quiz" data-toggle="buttons">
+            {% for option in options %}
+            <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i
+                  class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio"
+                name="{{paper.disease}}{{outer_loop.index}}" value="{{option.value}}">{{option.text}}</label>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+    <div style="display: flex;justify-content: center; padding-left: 20%; padding-right: 20%;">
+      <button onclick="previousButton()" class="element-animation1 btn-primary previous">Previous</button>
+      <button onclick="nextButton()" class="element-animation1 next btn-primary">Next</button>
+      <button onclick="submitButton()" class="element-animation1 submit">Submit</button>
+    </div>
+  </div>
+  </div>
+
+  <form id="xform" action="/visualize" method="POST">
+    <input id="xsubmit" type="hidden" name="data" value="0">
+  </form>
+
+  <div class="modal fade" style="height:300px" id="smallModal">
+    <div class="modal-dialog">
+      <div class="modal-content" style="height:150px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Error!</h4>
+        </div>
+        <div style="height:200px" class="modal-body">
+          <p>You have to answer all questions to go to the next page.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

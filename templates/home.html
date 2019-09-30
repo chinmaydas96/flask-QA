@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<title>Online medic</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link href="../static/images/favicon.ico" rel="icon" type="image/x-icon" />
+<style>
+  body,
+  h1 {
+    font-family: "Raleway", sans-serif
+  }
+
+  body,
+  html {
+    height: 100%
+  }
+
+  .bgimg {
+    background-image: url('../static/images/front.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .bg-text {
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .bottom-text {
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Black w/opacity/see-through */
+    color: white;
+    border: 1px solid #f1f1f1;
+    border-radius: 20px;
+    position: absolute;
+    top: 80%;
+    width: 100%;
+    height: 20%;
+    z-index: 2;
+    padding: 11px;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .column {
+    flex: 50%;
+  }
+
+  .column:hover {
+    background-color: rgba(255, 255, 255, 0.3)
+  }
+</style>
+
+<body>
+
+  <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+    <div class="w3-display-middle bg-text">
+      <h1 class="w3-jumbo w3-animate-top">Start Test</h1>
+      <div class="row">
+        <div class="column">
+          <a href="/questions/male">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVNSURBVHhe7Z1HqCRVFIafOYEJIyiKAXUjoyIm0IUuzFlG3QwMLpwZEVSMS8UAbsSFoohgwoTgQgXDyoQoBhR1YcCICRPm7PcvLjTNeV3VVbeq76k6H3ybt+l76+/qm+9bCoIgCIIgCILAO5viNgW5EY6aK/C/gjwBR00EUhgRSGFEIIURgRRGBFIYEUhhnI8fdOCXaD3wKkcfSBdsi6+i9cCrjEAy0yYMGYFkpG0YMgLJRI4wZASSgVxhyAikJfOE8Qe+P/W3aSOQFswbxil438TfLCOQhjQJQ0QgHdA0DBGBZKZNGCICyUjbMEQEkokcYYgIJAO5whARSEtyhiEikBbkDkMMKpDtcC88CI/CQ3AF7oLrY066CEO4DWQHXIm34ov4LVoVSOqhvIcP4MV4IK6HTegqDOEqED2IC/Al/BetAs/jp3gz6i2qS5dhCBeB7I134O9oFTKHL+NpOOut6ToMUXQgO+Pd+DdahevCN/FonKaPMESRgagBvhB/QKtQffgQqp0SfYUhigtkJ3wKrcL0rXaGqOPQVxiiqECOwC/QKkjp5ghDFBPIifgrWoWo6/f4Oj6Nj6LetBfwI8zRK1vOXGGIIgI5G/9CqwCz/BzVbVXvSD91s9gMD8Mr8VnMFVDOMMTCA9EHqFLWh1vqQT6Bx2Cb0feeeB3+iNbn1DF3GGKhgRyMv6D1wZb6ZmtaJCdb4w04z5dCdhGGWFggOi+n33brQ6f9CVdj06mOOuyHr6D1+ZbXYxeou68u93Jqyic7erBqdK2KTvsO7ot9sAneglY5pv0Od8VBcC5alZxWc1YalPXN5Vin0Vdvzj1bYZ2xhsLYAhfFZWiVa9qz0DU3olWxSbV7b3tcNHXK+gnqLLtLtICkBtqqWFIzugdgCWyAz6FVzknXokuuRqtCk16CJaGGu+pL9DFuiK5Qgb9Cq0JJTX2XWLFL0SrvpF2MSTpFc1VWRSY9HktkY9RbYJU5+Ri64n60KpJ8Dbsc+LVlHVrlTv6J6kG6QHNOGkhZFUmehyWjLvjPaJU96aYLrOG+VYHkb7glls49aJU/eTu64CK0KpDU7K0HzkSr/Mk30AXaMWJVIKlRsQc0jpo1paLNGFp3KZ6qwZV2GXpBm+2sOiQ1a1w8VddIVK32lcTjaNUheRwWz6y1cjXontDWVaseyVVYNJoPsgqe/AY9oYUpqx7JNVg0GixZBU9qBOyJq9CqR1LTLEUTb0iBDKkNqVri1Wpo8Yypl9XLRra2PI9W4ZNHoheqxiF9bchoxZBG6v+gVQep3ZcurgLXETKrAsmhzGW9jS7QbkOrAsmhzPaqwXfBWNZD9Aa5Yegrhtrrq+2xbhj6mrq2xrpCvY+qXSdvodddJ6ejO65BqzKTet2XpbfIHd52LuptHfTORTG0vb26DcLt3l4xz+73zXFR1Gk3pM5Huqfu+RBdKlPy+ZBncBAM4QSVbpnYAweD9zOGZ+DgKOEUrtq0eU/hqrEfLCfhPA9Dv+3aad72nPru2OSc+r1Y8hRPFtRTaXIF02eomxxOxapustqHQ1H/U6rpTQ5aLXQ5AGzCydj2rhNd86d2QKdjH0ats+jhf4izFpbqqHu7Rvd/aEu8DUhv0rU4+J+p5dgRn0Tr4fTt13gsjp50o5yuW7IeVB8+iLpiMJhAD+Qu7PvORfXgghnoVtI7Uef4rIeYQ13jpzWNNl3p0aHpe93bqytdrYc6r9rAdxPmHmyOEjX+5+BtqJnhqk0UervexUdQ25J0eXK8DR2ja133QX3j1Q4cjvvjbujupoUgCIIgCIIgCAIfLC39Dzv39aIKqTJvAAAAAElFTkSuQmCC">
+          </a>
+        </div>
+        <div class="column">
+          <a href="/questions/female">
+            <img
+              src="data:image/png;base64,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">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-text">
+      This app was created for people to check their health issues etc...
+    </div>
+  </div>
+
+</body>
+
+</html>
