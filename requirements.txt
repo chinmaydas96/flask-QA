@@ -8,4 +8,4 @@ MarkupSafe==1.1.1
 pycodestyle==2.5.0
 Werkzeug==0.16.0
 gunicorn==19.9.0
-wheel==0.33.1
+wheel==0.38.1
