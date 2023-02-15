@@ -6,6 +6,6 @@ itsdangerous==1.1.0
 Jinja2==2.11.3
 MarkupSafe==1.1.1
 pycodestyle==2.5.0
-Werkzeug==0.16.0
+Werkzeug==2.2.3
 gunicorn==19.9.0
 wheel==0.33.1
